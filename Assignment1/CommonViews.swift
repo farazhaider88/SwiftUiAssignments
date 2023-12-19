@@ -38,7 +38,7 @@ struct CheckBoxView: View {
 
     var body: some View {
         Image(systemName: checked ? "checkmark.square.fill" : "square")
-            .foregroundColor(checked ? Color(UIColor.systemBlue) : Color.secondary)
+            .foregroundColor(checked ? Color(hex: 0x5DB075) : Color.secondary)
             .onTapGesture {
                 self.checked.toggle()
             }

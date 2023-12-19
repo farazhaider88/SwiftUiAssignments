@@ -87,8 +87,7 @@ struct SignUpView: View {
             Button(action: {
                 isPasswordVisible.toggle()
             }) {
-                Image(systemName: isPasswordVisible ? "eye" : "eye.slash")
-                    .foregroundColor(.gray)
+                Text(isPasswordVisible ? "Hide" : "Show").foregroundColor(Color(hex: 0x5DB075))
             }
         }
         .padding()
