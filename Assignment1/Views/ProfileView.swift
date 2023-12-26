@@ -13,7 +13,7 @@ struct ProfileView: View {
        }
     
     @State var index = 0
-    
+    @State private var isBottomSheetVisible = false
     var body: some View {
         NavigationStack{
             ZStack{
@@ -37,11 +37,21 @@ struct ProfileView: View {
                         }
                     }.navigationBarTitleDisplayMode(.inline)
                 
-                Image("profile")
-                    .frame(width: 158, height: 158)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                    .shadow(radius: 10).padding(.bottom,-100)
+                Button(action: {
+                        print("button pressed")
+                    isBottomSheetVisible = true
+                      }) {
+                          Image("profile")
+                              .frame(width: 158, height: 158)
+                              .clipShape(Circle())
+                              .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                              .shadow(radius: 10).padding(.bottom,-100)
+                      }.sheet(isPresented: $isBottomSheetVisible) {
+                          DrawerView()
+                              .presentationDetents([.height(250), .medium])
+                              .presentationDragIndicator(.visible)
+                      }
+
             }
             VStack{
                 Text("Victoria Robertson").font(Font.custom("Inter-SemiBold", size: 30))
@@ -51,8 +61,10 @@ struct ProfileView: View {
                 HStack(spacing:0){
                 
                     HStack{
+                        Spacer()
                         Text("Posts")
                             .foregroundColor(self.index == 0 ? .green : .gray)
+                        Spacer()
                     }.padding(.vertical, 10)
                         .padding(.horizontal,35)
                         .background((Color.white).opacity(self.index == 0 ? 1 : 0))
@@ -62,8 +74,10 @@ struct ProfileView: View {
                         }
                     
                     HStack{
+                        Spacer()
                         Text("Photos")
                             .foregroundColor(self.index == 1 ? .green : .gray)
+                        Spacer()
                     }.padding(.vertical, 10)
                         .padding(.horizontal,35)
                         .background((Color.white).opacity(self.index == 1 ? 1 : 0))
@@ -75,6 +89,7 @@ struct ProfileView: View {
                     .background(Color.black.opacity(0.06))
                     .clipShape(Capsule())
                     Spacer(minLength: 0)
+                
             }.padding(.top,40)
             Spacer()
             ScrollView(.vertical) {
