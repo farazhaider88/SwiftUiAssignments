@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct DrawerView: View {
+    @State private var isPresented = false
     var body: some View {
         VStack(spacing:10){
+            Spacer()
             Text("Drawer Header").font(Font.custom("Inter-Medium", size: 30))
+                .padding(.bottom,10)
             Text("Consequat velit qui adipisicing sunt do reprehenderit ad laborum tempor ullamco exercitation.").font(Font.custom("Inter-Medium", size: 16)).padding()
-            setConfirmButton("Click Me")
-            Button("Secondary Action") {
+          
+            PrimaryButtonView(title: "Click Me", buttonAction: {
+                isPresented = true
+            }) .fullScreenCover(isPresented: $isPresented, content: CongratulationView.init)
+
+            SecondaryButtonView(title: "Secondary Action") {
                 
-            }.frame(width: 343)
-                .frame(height: 51)
-                .foregroundColor(Color(hex: 0x5DB075))
-                .cornerRadius(30)
-                .font(Font.custom("Inter-SemiBold", size: 16))
-        }.padding(.all,10)
+            }
+        }.frame(height: 295)
+        
     }
 }
 
 #Preview {
     DrawerView()
 }
+

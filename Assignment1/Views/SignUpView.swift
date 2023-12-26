@@ -46,6 +46,7 @@ struct SignUpView: View {
                 }.navigationBarTitleDisplayMode(.inline)
             
             
+            
             TextField("Name", text: $name , onCommit: {
                 isNameValid = validateName(name: name)
             })
@@ -55,6 +56,8 @@ struct SignUpView: View {
             .autocapitalization(.none)
             .cornerRadius(8)
             .padding(.horizontal)
+            .padding(.bottom,16)
+            .padding(.top,32)
             
             if !isNameValid {
                 Text("Please don't leave name field empty")
@@ -70,6 +73,7 @@ struct SignUpView: View {
             .autocapitalization(.none)
             .cornerRadius(8)
             .padding(.horizontal)
+            .padding(.bottom,16)
             
             if !isEmailValid {
                 Text("Please enter a valid email address.")
@@ -99,7 +103,7 @@ struct SignUpView: View {
             .background(Color(hex: 0xE8E8E8))
             .cornerRadius(8)
             .padding(.horizontal)
-            .padding(.bottom, 10)
+            .padding(.bottom, 32)
             
             if !isPasswordValid {
                 Text("Password must be at least 8 characters.")
@@ -111,11 +115,15 @@ struct SignUpView: View {
                 VStack(alignment: .leading) {
                     Text("I would like to receive your newsletter and other promotional information.").foregroundColor(Color(hex: 0x666666))
                 }
+            }.padding(.bottom,43)
+            
+            PrimaryButtonView(title: "Sign Up") {
+                print("Signup Clicke")
+            }.padding(.bottom,16)
+            
+            SecondaryButtonView(title: "Forgot your password?") {
+                
             }
-            
-            setConfirmButton("Sign Up")
-            
-            setForgotPasswordButton("Forgot your password?")
             
             Spacer()
         }

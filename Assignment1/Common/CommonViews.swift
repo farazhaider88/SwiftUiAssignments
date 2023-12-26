@@ -11,25 +11,39 @@ func setTitle(_ title:String) -> Text {
     return Text(title).font(Font.custom("Inter-SemiBold", size: 30))
 }
 
-func setConfirmButton(_ title:String) -> some View {
-    return Button(title) {
-        print("Login Clicked")
-    }.frame(width: 343)
-        .frame(height: 51)
-        .padding([.leading,.trailing],16)
-        .background(Color(hex: 0x5DB075))
-        .foregroundColor(Color.white)
-        .cornerRadius(30)
-        .font(Font.custom("Inter-SemiBold", size: 16))
-        .padding()
+
+struct PrimaryButtonView: View {
+    var title = ""
+    var width = 343.0
+    var buttonAction : () -> ()
+
+    var body: some View {
+        Button {
+            self.buttonAction()
+        } label: {
+            Text(title)
+        }.frame(width: width)
+            .frame(height: 51)
+            .padding([.leading,.trailing],16)
+            .background(Color(hex: 0x5DB075))
+            .foregroundColor(Color.white)
+            .cornerRadius(30)
+            .font(Font.custom("Inter-SemiBold", size: 16))
+    }
 }
 
-func setForgotPasswordButton(_ title:String) -> some View {
-    return Button(title) {
-        print("Forgot Clicked")
+
+struct SecondaryButtonView: View {
+    var title = ""
+    var buttonAction : () -> ()
+    var body: some View {
+        Button {
+            self.buttonAction()
+        } label: {
+            Text(title)
+        }.foregroundColor(Color(hex: 0x5DB075))
+            .font(Font.custom("Inter-SemiBold", size: 16))
     }
-    .foregroundColor(Color(hex: 0x5DB075))
-    .font(Font.custom("Inter-SemiBold", size: 16))
 }
 
 

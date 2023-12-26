@@ -14,6 +14,14 @@ struct ProfileView: View {
     
     @State var index = 0
     @State private var isBottomSheetVisible = false
+    @State private var moveToRoot = false{
+        didSet{
+            if moveToRoot{
+                isBottomSheetVisible = false
+            }
+        }
+    }
+
     var body: some View {
         NavigationStack{
             ZStack{
@@ -37,20 +45,17 @@ struct ProfileView: View {
                         }
                     }.navigationBarTitleDisplayMode(.inline)
                 
-                Button(action: {
-                        print("button pressed")
-                    isBottomSheetVisible = true
-                      }) {
                           Image("profile")
                               .frame(width: 158, height: 158)
                               .clipShape(Circle())
                               .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                              .shadow(radius: 10).padding(.bottom,-100)
-                      }.sheet(isPresented: $isBottomSheetVisible) {
-                          DrawerView()
-                              .presentationDetents([.height(250), .medium])
-                              .presentationDragIndicator(.visible)
-                      }
+                              .shadow(radius: 10).padding(.bottom,-100).onTapGesture {
+                                  isBottomSheetVisible = true
+                              }.sheet(isPresented: $isBottomSheetVisible) {
+                                  DrawerView()
+                                      .presentationDetents([.height(295)])
+                                      .presentationDragIndicator(.visible)
+                              }
 
             }
             VStack{
