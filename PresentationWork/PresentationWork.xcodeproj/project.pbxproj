@@ -16,6 +16,11 @@
 		B4E61A5C2B199B7A00BF293D /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E61A5B2B199B7A00BF293D /* SideMenuView.swift */; };
 		B4E61A5E2B199DB100BF293D /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E61A5D2B199DB100BF293D /* SideMenu.swift */; };
 		E0208B392B42969100258530 /* StudentDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0208B382B42969100258530 /* StudentDetailView.swift */; };
+		E0E16BC02B4C828E00472FEF /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E16BBF2B4C828E00472FEF /* SettingView.swift */; };
+		E0E16BC22B4C82F900472FEF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E16BC12B4C82F900472FEF /* SettingsViewController.swift */; };
+		E0E16BC42B4C830700472FEF /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0E16BC32B4C830700472FEF /* Settings.storyboard */; };
+		E0E16BC62B4C869400472FEF /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E16BC52B4C869400472FEF /* SettingTableViewCell.swift */; };
+		E0E16BC82B4C8CEE00472FEF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E16BC72B4C8CEE00472FEF /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,11 @@
 		B4E61A5B2B199B7A00BF293D /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		B4E61A5D2B199DB100BF293D /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		E0208B382B42969100258530 /* StudentDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailView.swift; sourceTree = "<group>"; };
+		E0E16BBF2B4C828E00472FEF /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		E0E16BC12B4C82F900472FEF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		E0E16BC32B4C830700472FEF /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		E0E16BC52B4C869400472FEF /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		E0E16BC72B4C8CEE00472FEF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,7 @@
 				B401A7F62B3C028500B3C9D8 /* SideMenu */,
 				B401A7F52B3C024E00B3C9D8 /* ListView */,
 				E0208B382B42969100258530 /* StudentDetailView.swift */,
+				E0E16BBE2B4C826300472FEF /* SettingTab */,
 				B48038492B0690AC00070806 /* Assets.xcassets */,
 				B480384B2B0690AC00070806 /* Preview Content */,
 			);
@@ -120,6 +131,18 @@
 				B480384C2B0690AC00070806 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E0E16BBE2B4C826300472FEF /* SettingTab */ = {
+			isa = PBXGroup;
+			children = (
+				E0E16BBF2B4C828E00472FEF /* SettingView.swift */,
+				E0E16BC12B4C82F900472FEF /* SettingsViewController.swift */,
+				E0E16BC52B4C869400472FEF /* SettingTableViewCell.swift */,
+				E0E16BC32B4C830700472FEF /* Settings.storyboard */,
+				E0E16BC72B4C8CEE00472FEF /* ProfileView.swift */,
+			);
+			path = SettingTab;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0E16BC42B4C830700472FEF /* Settings.storyboard in Resources */,
 				B480384D2B0690AC00070806 /* Preview Assets.xcassets in Resources */,
 				B480384A2B0690AC00070806 /* Assets.xcassets in Resources */,
 			);
@@ -195,10 +219,14 @@
 				E0208B392B42969100258530 /* StudentDetailView.swift in Sources */,
 				B48038482B0690AB00070806 /* ListView.swift in Sources */,
 				B48038542B07AFEB00070806 /* AddStudentView.swift in Sources */,
+				E0E16BC02B4C828E00472FEF /* SettingView.swift in Sources */,
 				B4E61A5C2B199B7A00BF293D /* SideMenuView.swift in Sources */,
 				B4E61A5E2B199DB100BF293D /* SideMenu.swift in Sources */,
+				E0E16BC62B4C869400472FEF /* SettingTableViewCell.swift in Sources */,
 				B48038562B0B317900070806 /* StudentTabView.swift in Sources */,
 				B48038462B0690AB00070806 /* PresentationWorkApp.swift in Sources */,
+				E0E16BC82B4C8CEE00472FEF /* ProfileView.swift in Sources */,
+				E0E16BC22B4C82F900472FEF /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

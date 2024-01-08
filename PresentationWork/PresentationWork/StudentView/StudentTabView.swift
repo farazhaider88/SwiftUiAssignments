@@ -11,19 +11,27 @@ struct StudentTabView: View {
     @State var selectedIndex = 0
     @State var showMenu = false
     var body: some View {
-        VStack {            
-            ZStack {
-                TabView(selection: $selectedIndex) {
-                    ListView(showMenu: $showMenu)
-                        .tabItem { Text("Students") }
-                        .tag(0)
-                    Text("Setting View")
-                        .tabItem { Text("Settings") }
-                        .tag(1)
+        NavigationView {
+            VStack {
+                ZStack {
+                    TabView(selection: $selectedIndex) {
+                        ListView(showMenu: $showMenu)
+                            .tabItem {
+                                Image(systemName: "house.fill")
+                                Text("Students")
+                            }
+                            .tag(0)
+                        SettingView()
+                            .tabItem {
+                                Label("Settings", systemImage: "gear")
+                            }.tag(1)
+                        
+                        
+                    }
+                    SideMenu(isShowing: $showMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedIndex, presentSideMenu: $showMenu)))
                 }
-                SideMenu(isShowing: $showMenu, content: AnyView(SideMenuView(selectedSideMenuTab: $selectedIndex, presentSideMenu: $showMenu)))
+                
             }
-
         }
     }
 }
@@ -31,3 +39,4 @@ struct StudentTabView: View {
 #Preview {
     StudentTabView()
 }
+
