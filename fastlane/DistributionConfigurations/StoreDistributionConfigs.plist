@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>HouseBundleID</key>
+	<string>Etisalat.House</string>
+	<key>NotificationsServiceBundleID</key>
+	<string>Etisalat.House.SmilesNotificationService</string>
+	<key>OutputDirectory</key>
+	<string>~/Desktop/SmilesBuilds/AdHoc/</string>
+	<key>Targets</key>
+	<string>House,SmilesNotificationService</string>
+	<key>HouseInfoPath</key>
+	<string>House/Info.plist</string>
+	<key>NotificationServiceInfoPath</key>
+	<string>SmilesNotificationService/Info.plist</string>
+	<key>EntitlementsPath</key>
+	<string>House/House.entitlements</string>
+	<key>FirebaseAppID</key>
+	<string>1:523913430075:ios:438b05326ccde25d</string>
+</dict>
+</plist>

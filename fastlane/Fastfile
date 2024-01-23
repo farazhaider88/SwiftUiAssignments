@@ -1,0 +1,153 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+HOUSE_APPS_ENTERPRISE_EXPORT_CONFIG = "fastlane/ExportConfigurations/house_apps_enterprise_export_config.plist"
+HOUSE_ADHOC_EXPORT_CONFIG = "fastlane/ExportConfigurations/house_adhoc_export_config.plist"
+HOUSE_APPSTORE_EXPORT_CONFIG = "fastlane/ExportConfigurations/house_appstore_export_config.plist"
+ENTERPRISE_DISTRIBUTION_CONFIGS = "fastlane/DistributionConfigurations/EnterpriseDistributionConfigs.plist"
+STORE_DISTRIBUTION_CONFIGS = "fastlane/DistributionConfigurations/StoreDistributionConfigs.plist"
+
+before_all do
+  UI.message("Started Fastlane")
+  notification(subtitle: "Started Fastlane", message: "Before All")
+end
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :build do
+    # add actions here: https://docs.fastlane.tools/actions
+    archive_app()
+  end
+
+  # fastlane generate_build environment:UAT build:169 version:7.1.1 notes:"Smiles Sprint 130 UAT AddressBook with Fastlane" testers:"BE, iOS"
+  lane :generate_build do |options|
+    
+    # Check for uncommited changes
+    ensure_git_status_clean()
+
+    IS_ENTERPRISE_BUILD = options[:isEnterprise] || true
+    ENVIRONMENT = options[:environment] || "UAT"
+    BUILD = options[:build] || "165"
+    VERSION = options[:version] || "7.1.1"
+    CONFIG_FILE_PATH = "ConfigurationFiles/" + ENVIRONMENT + ".xcconfig"
+    setupBuildAndVersion(CONFIG_FILE_PATH, BUILD, VERSION)
+    DISTRIBUTION_CONFIGS_PATH = ''
+    EXPORT_CONFIGS_PATH = ''
+
+    if IS_ENTERPRISE_BUILD
+      DISTRIBUTION_CONFIGS_PATH = ENTERPRISE_DISTRIBUTION_CONFIGS
+      EXPORT_CONFIGS_PATH = HOUSE_APPS_ENTERPRISE_EXPORT_CONFIG
+    else
+      DISTRIBUTION_CONFIGS_PATH = STORE_DISTRIBUTION_CONFIGS
+      if ENVIRONMENT == 'RC'
+        EXPORT_CONFIGS_PATH = HOUSE_ADHOC_EXPORT_CONFIG
+      else
+        EXPORT_CONFIGS_PATH = HOUSE_APPSTORE_EXPORT_CONFIG
+      end
+    end
+
+    UI.message("**---- Starting Application archiving for " + ENVIRONMENT + " ----**")
+    
+    HOUSE_PLIST_PATH = get_info_plist_value(path: DISTRIBUTION_CONFIGS_PATH, key: "HouseInfoPath")
+    BUNDLE_ID = get_info_plist_value(path: DISTRIBUTION_CONFIGS_PATH, key: "HouseBundleID")
+    #updates identifier for House target
+    update_app_identifier(
+      plist_path: HOUSE_PLIST_PATH,
+      app_identifier: BUNDLE_ID
+    )
+
+    NOTIFICATION_SERVICE_HOUSE_INFO_PATH = get_info_plist_value(path: DISTRIBUTION_CONFIGS_PATH, key: "NotificationServiceInfoPath")
+    ENTERPRISE_NOTIFICATION_SERVICE_BUNDLE_ID = get_info_plist_value(path: DISTRIBUTION_CONFIGS_PATH, key: "NotificationsServiceBundleID")
+    #updates identifier for notification service target
+    update_app_identifier(
+      plist_path: NOTIFICATION_SERVICE_HOUSE_INFO_PATH,
+      app_identifier: ENTERPRISE_NOTIFICATION_SERVICE_BUNDLE_ID
+    )
+
+    ENTERPRISE_TEAM_ID = get_info_plist_value(path: EXPORT_CONFIGS_PATH, key: "teamID")
+    TARGETS = get_info_plist_value(path: DISTRIBUTION_CONFIGS_PATH, key: "Targets")
+    #sets signing team for enterprise certificate
+    update_project_team(
+      teamid:ENTERPRISE_TEAM_ID,
+      targets:TARGETS
+    )
+
+    if IS_ENTERPRISE_BUILD
+      ENTITLEMENTS_PATH = get_info_plist_value(path: DISTRIBUTION_CONFIGS_PATH, key: "EntitlementsPath")
+      #deleting apple pay
+      update_plist(
+        plist_path: ENTITLEMENTS_PATH,
+        block: proc do |entitlements|
+          entitlements.delete("com.apple.developer.devicecheck.appattest-environment")
+          entitlements.delete("com.apple.developer.in-app-payments")
+        end
+      )
+    end
+
+    
+    SCHEME = ENVIRONMENT
+    OUTPUT_DIRECTORY = get_info_plist_value(path: DISTRIBUTION_CONFIGS_PATH, key: "OutputDirectory")+SCHEME
+    DISTRIBUTION_METHOD = get_info_plist_value(path: EXPORT_CONFIGS_PATH, key: "method")
+    
+    build_ios_app(scheme: SCHEME,
+      output_directory: OUTPUT_DIRECTORY,
+      export_method: DISTRIBUTION_METHOD,
+      export_options: EXPORT_CONFIGS_PATH
+    )
+    UI.message("**---- Application archiving completed for " + ENVIRONMENT + " ----**")
+
+    # uploading build to firebase
+    ENTERPRISE_FIREBASE_APP_ID = get_info_plist_value(path: DISTRIBUTION_CONFIGS_PATH, key: "FirebaseAppID")
+    TESTER_GROUPS = options[:testers] || "smiles-uat, smiles-qa, be"
+    RELEASE_NOTES = options[:notes] || "Performance improvements and bug fixes"
+    UI.message("**---- Distributing build on Firebasee for testers = #{TESTER_GROUPS} ----**")
+    firebase_app_distribution(
+      app: ENTERPRISE_FIREBASE_APP_ID,
+      groups: TESTER_GROUPS,
+      release_notes: RELEASE_NOTES
+    )
+
+    # Reset all changes
+    reset_git_repo(force: true)
+
+  end
+
+  after_all do |lane|
+    UI.message("Finished Fastlane")
+    notification(subtitle: "Finished Fastlane", message: "After All")
+  end
+
+  def setupBuildAndVersion(filePath, build, version)
+
+    UI.message("Upadting Verison")
+  
+    set_xcconfig_value(
+      path: filePath,
+      name: "APPLICATION_VERSION",
+      value: build
+    )
+  
+    set_xcconfig_value(
+      path: filePath,
+      name: "VERSION_NUMBER",
+      value: version
+    )
+    UI.message("Version Updated")
+  
+  end
+
+end

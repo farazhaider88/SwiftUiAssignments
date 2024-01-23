@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.000183">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="01: notification" time="0.544413">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="02: set_xcconfig_value" time="0.002494">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="03: set_xcconfig_value" time="0.001155">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="04: get_info_plist_value" time="0.001628">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="05: get_info_plist_value" time="0.000637">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="06: update_app_identifier" time="0.765706">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="07: get_info_plist_value" time="0.000709">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: get_info_plist_value" time="0.000525">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: update_app_identifier" time="0.718439">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: get_info_plist_value" time="0.00143">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: get_info_plist_value" time="0.000512">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="12: update_project_team" time="1.053344">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="13: get_info_plist_value" time="0.000716">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="14: update_plist" time="0.002918">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="15: get_info_plist_value" time="0.000541">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="16: get_info_plist_value" time="0.000506">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="17: get_info_plist_value" time="0.000481">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="18: build_app" time="970.024274">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="19: appbox" time="4.786879">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
